@@ -54,7 +54,7 @@ export const WalletBalances = observer(() => {
 
   return (
       <Box className={styles.container}>
-        <Box direction="column" align="center" style={{marginBottom : 30}}>
+        <Box direction="column" align="center">
           <Title>{user.isAuthorized ? 'Account' : 'Connect Your Wallet'}</Title>
         </Box>
 

@@ -8,10 +8,11 @@ export const WalletButton = (props: any) => {
 
   return (
     <Box
-      direction="row"
-      justify="start"
+      direction="column"
+      justify="center"
       align="baseline"
       margin={{ bottom: 'small' }}
+        style={{width:180}}
     >
       <Button
         margin={{ right: 10 }}
@@ -27,7 +28,9 @@ export const WalletButton = (props: any) => {
       >
         {children}
       </Button>
+      <div style={{textAlign:'center', width:'100%'}}>
       {error ? <Error error={error} /> : null}
+      </div>
     </Box>
   );
 };
