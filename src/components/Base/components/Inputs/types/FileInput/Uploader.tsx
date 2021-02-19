@@ -58,7 +58,8 @@ export const FileUploader = ({ amount, onClearClick, ...rest }: IFileUploaderPro
 
 export const FileWrap = styled.div`
   position: relative;
-  border: ${(props: any) => `1px dashed ${props.theme.palette.Basic500}`};
+  border: ${(props: any) => `2px dashed #E7ECF7`};
+  border-radius:4px;
   cursor: pointer;
   padding: 24px;
   height: 40px;

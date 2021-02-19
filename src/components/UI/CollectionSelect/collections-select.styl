@@ -9,8 +9,8 @@
 }
 
 .cardContainer {
-  border: 1px solid #E7ECF7;
-  border-radius: 5px;
+  border: 2px solid #E7ECF7
+  border-radius: 4px;
   padding: 20px;
   display: flex;
   direction: column;
@@ -18,15 +18,23 @@
   margin-right: 15px;
   margin-bottom: 15px;
   height: 120px;
-  width: 90px;
+  width: 100px;
   align-items: center;
   justify-content: center;
 
   &:hover, &.selected {
     border-color: #47b8eb;
+
+    .plus {
+      color: #47b8eb !important;
+    }
   }
 }
 
 .name {
   margin-top: 10px;
+}
+
+.plus {
+  color: #E7ECF7 !important;
 }

@@ -93,7 +93,7 @@ export const ModalView: React.FC<
     >
       <ModalWrap ref={modalWrapRef}>
         <Modal
-          style={{ width, padding: 20 }}
+          style={{ width, padding: 30 }}
           onClick={(event: any) => {
             event.stopPropagation();
           }}

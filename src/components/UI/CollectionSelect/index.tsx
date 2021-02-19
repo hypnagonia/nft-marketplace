@@ -46,7 +46,7 @@ export const CollectionSelect = ({ collections, onChange, value }: ICollectionSe
       <Box className={styles.cardContainer} style={{ background: "white", borderRadius: 5 }}
         onClick={openCreate721Modal}
       >
-        <Icon glyph={"Plus"} color="#9698A7"/>
+        <Icon glyph={"Plus"} className={styles.plus}/>
         <span className={styles.name}>New</span>
       </Box>
 
