@@ -83,12 +83,13 @@ export const ActionModal = observer<{
       <Icon
         style={{
           position: 'absolute',
-          right: '30px',
+          right: '25px',
+          top: '23px',
           color: '#9698A7',
           cursor: 'pointer'
         }}
         onClick={onClose}
-        glyph="Close" size="medium" />
+        glyph="Close" size="large" />
 
       {false ? (
         <Header
