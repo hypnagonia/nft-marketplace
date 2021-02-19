@@ -153,7 +153,7 @@ export class Create721Asset extends React.Component<any> {
             />
 
             <Input
-              label="Description (optional)"
+              label={<>Description <span className={styles.labelSpan}>Optional</span></>}
               name="description"
               style={{ width: "100%" }}
               placeholder="A few words about your collectible"
