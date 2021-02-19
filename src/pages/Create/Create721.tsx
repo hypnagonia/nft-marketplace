@@ -14,7 +14,7 @@ import {
   NumberInput
 } from "components/Form";
 import { IStores } from "../../stores";
-import { mediaFile, moreThanZero } from "../../utils";
+import { imageFile, moreThanZero } from "../../utils";
 
 
 export class Create721 extends React.Component<any> {
@@ -37,24 +37,24 @@ export class Create721 extends React.Component<any> {
             </Box>
 
             <FileInput
-              label={<>Upload File <span style={{fontSize: '14px'}}>PNG, GIF, WEBP, MP4 or MP3. Max 30mb</span></>}
+              label={<>Upload File <span style={{fontSize: '14px'}}>We recommend an image of at least 400x400. Gifs work too.</span></>}
               name="logo"
               rules={[
                 isRequired,
-                mediaFile
+                imageFile
               ]}
             />
 
             <Input
-              label="Name"
+              label={<>Display Name <span className={styles.labelSpan}>Required</span></>}
               name="name"
               style={{ width: "100%" }}
-              placeholder="Token name"
+              placeholder="Token name. Token name cannot be changed in future"
               rules={[isRequired]}
             />
 
             <Input
-              label="Symbol"
+              label={<>Symbol <span className={styles.labelSpan}>Required</span></>}
               name="symbol"
               style={{ width: "100%" }}
               placeholder="Token symbol"
@@ -62,7 +62,7 @@ export class Create721 extends React.Component<any> {
             />
 
             <Input
-              label="Description (optional)"
+              label={<>Description <span className={styles.labelSpan}>Optional</span></>}
               name="description"
               style={{ width: "100%" }}
               placeholder="A few words about your token collection"

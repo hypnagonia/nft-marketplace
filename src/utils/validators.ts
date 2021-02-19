@@ -140,6 +140,10 @@ export const moreThanZero = {
   validateType: "requiredValidator"
 };
 
+const imageExtensions = ["jpg", "jpeg", "png", "gif"]
+const audioExtensions = ["mp3"]
+const videoExtensions = [ "mp4", "mpeg4"]
+
 export const mediaFile = {
   validator(
     rule: any[],
@@ -150,9 +154,32 @@ export const mediaFile = {
     const errors = [];
     const file = value[0];
 
-    const allowedExtensions = ["jpg", "jpeg", "png", "gif", "mp3", "mp4", "mpeg4"];
+    const allowedExtensions = [...imageExtensions,...audioExtensions, ...videoExtensions];
 
-    // file.size
+    // file.size todo 30mb
+
+    if (!allowedExtensions.find(e => file.type.indexOf(e) !== -1)) {
+      errors.push("Invalid file type");
+    }
+
+    callback(errors);
+  },
+  validateType: "requiredValidator"
+};
+
+export const imageFile = {
+  validator(
+    rule: any[],
+    value: any,
+    callback: (errors: any[]) => void,
+    storeData?: any
+  ) {
+    const errors = [];
+    const file = value[0];
+
+    const allowedExtensions = [...imageExtensions];
+
+    // file.size todo 30mb
 
     if (!allowedExtensions.find(e => file.type.indexOf(e) !== -1)) {
       errors.push("Invalid file type");
