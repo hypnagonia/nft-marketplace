@@ -42,7 +42,7 @@ export class Create721 extends React.Component<any> {
             />
 
             <Input
-              label="Display Name"
+              label="Name"
               name="name"
               style={{ width: "100%" }}
               placeholder="Token name"

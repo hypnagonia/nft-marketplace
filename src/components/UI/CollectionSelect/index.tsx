@@ -23,8 +23,7 @@ export const CollectionSelect = ({ collections, onChange, value }: ICollectionSe
 
   const openCreate721Modal = () => {
     return actionModals.open(() => <Create721 />, {
-      title: "Connect Your Wallet",
-      closeText: "Close",
+      title: "",
       noValidation: true,
       width: "600px",
       showOther: true,

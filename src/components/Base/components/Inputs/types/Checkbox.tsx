@@ -54,13 +54,13 @@ const CheckboxClass = (props: ICheckboxProps) => {
           <Icon
             glyph="CheckBox"
             onClick={() => onChange(false)}
-            color={disabled ? disabledColor : colorPrimary}
+            color={disabled ? disabledColor : '#47b8eb'}
           />
         ) : (
           <Icon
             glyph="CheckBoxEmpty"
             onClick={() => onChange(true)}
-            color={disabled ? disabledColor : colorPrimary}
+            color={disabled ? disabledColor : '#47b8eb'}
           />
         )}
       </div>

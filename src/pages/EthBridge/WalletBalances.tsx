@@ -137,7 +137,7 @@ export const WalletBalances = observer(() => {
             ) : (
               <>
                 <AssetRow
-                  asset="Harmony Address"
+                  asset="Address"
                   value={truncateAddressString(user.address)}
                 />
 

@@ -40,7 +40,12 @@ export class Create721Asset extends React.Component<any> {
     props: [
       { name: "", value: "" }
     ],
-    collectionIndex: 0
+    collectionIndex: 0,
+    unlockOncePurchased: false,
+    putOnSale: true,
+    instantSalePrice: false,
+    digitalCode: "",
+    instantPrice: 0
   };
 
   checkPropsRecords = (val) => {
@@ -102,12 +107,26 @@ export class Create721Asset extends React.Component<any> {
               name="putOnSale"
             />
 
-            <Checkbox
+            {this.formData.putOnSale && <Checkbox
               size={200}
               isRowLabel={true}
               label="Instant Sale Price"
               name="instantSalePrice"
-            />
+            />}
+
+            {this.formData.instantSalePrice && <>
+              <div style={{ marginTop: 20 }}></div>
+              <NumberInput
+                label={`Price`}
+                name="instantPrice"
+                type="decimal"
+                placeholder="0"
+                style={{ width: "100%" }}
+                rules={[
+                  moreThanZero
+                ]}
+              />
+            </>}
 
             <Checkbox
               style={{ marginBottom: 20 }}
@@ -116,6 +135,13 @@ export class Create721Asset extends React.Component<any> {
               label="Unlock Once Purchased"
               name="unlockOncePurchased"
             />
+
+            {this.formData.unlockOncePurchased && <Input
+              label="Digital Code"
+              name="name"
+              style={{ width: "100%" }}
+              placeholder="Digital key, code to redeem or a link to file"
+            />}
 
 
             <Input
@@ -150,14 +176,6 @@ export class Create721Asset extends React.Component<any> {
                     Number(value) > 100
                   ) {
                     const defaultMsg = `Exceeded the maximum amount`;
-                    errors.push(defaultMsg);
-                  }
-
-                  if (
-                    value &&
-                    Number(value) < 0
-                  ) {
-                    const defaultMsg = `Incorrect amount`;
                     errors.push(defaultMsg);
                   }
 
@@ -209,7 +227,7 @@ export class Create721Asset extends React.Component<any> {
             <Box direction="row" justify="center">
               <Button
                 bgColor="#00ADE8"
-                style={{ width: 220,  margin:10 }}
+                style={{ width: 220, margin: 10 }}
                 onClick={() => {
                 }}
               >
