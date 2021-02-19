@@ -158,12 +158,23 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
               <Text>FAQ</Text>
             </Box>*/}
 
-            {( true || user.isAuthorized ) &&
+
+            {(true || user.isAuthorized) &&
             <Box
               className={cn(styles.itemToken, styles.selected)}
               onClick={() => routing.push("/create")}
             >
               <Text>Create</Text>
+            </Box>
+            }
+
+            {(user.isAuthorized) &&
+            <Box
+              className={cn(styles.itemToken, "")}
+              onClick={() => {
+              }}
+            >
+              <Text>Inventory</Text>
             </Box>
             }
 
@@ -176,7 +187,7 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
               </Box>
               :
               <Box
-                className={cn(styles.itemToken,  styles.selected )}
+                className={cn(styles.itemToken, styles.selected)}
                 onClick={() => openConnectModal()}
               >
                 <Text>Connect</Text>

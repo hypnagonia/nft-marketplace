@@ -14,7 +14,7 @@ import {
   NumberInput
 } from "components/Form";
 import { IStores } from "../../stores";
-import { moreThanZero } from "../../utils";
+import { mediaFile, moreThanZero } from "../../utils";
 
 
 export class Create721 extends React.Component<any> {
@@ -37,8 +37,12 @@ export class Create721 extends React.Component<any> {
             </Box>
 
             <FileInput
-              label="Upload File"
+              label={<>Upload File <span style={{fontSize: '14px'}}>PNG, GIF, WEBP, MP4 or MP3. Max 30mb</span></>}
               name="logo"
+              rules={[
+                isRequired,
+                mediaFile
+              ]}
             />
 
             <Input

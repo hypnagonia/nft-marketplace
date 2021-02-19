@@ -1,15 +1,15 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
 export function createValidate(
   func: (value: any, data?: any) => boolean,
-  error: any,
+  error: any
 ) {
   return {
     validator(
       rule: any[],
       value: any,
       callback: (errors: any[]) => void,
-      storeData?: any,
+      storeData?: any
     ) {
       const errors = [];
 
@@ -17,7 +17,7 @@ export function createValidate(
         errors.push(error);
       }
       callback(errors);
-    },
+    }
   };
 }
 
@@ -28,7 +28,7 @@ interface ValidatorFunc<T = string> {
 export const maxLength = (length: number, msg?: string): ValidatorFunc => (
   _,
   value,
-  callback,
+  callback
 ) => {
   const errors = [];
 
@@ -43,7 +43,7 @@ export const maxLength = (length: number, msg?: string): ValidatorFunc => (
 export const maxAmount = (amount: number, msg?: string): ValidatorFunc => (
   _,
   value,
-  callback,
+  callback
 ) => {
   const errors = [];
 
@@ -59,21 +59,21 @@ export const isTheSameAs = (fieldName: string, err: string) => {
   return {
     ...createValidate(
       (value, formData) => _.get(formData, fieldName) !== value,
-      err,
+      err
     ),
-    validateType: 'requiredValidator',
+    validateType: "requiredValidator"
   };
 };
 
 export const nonEmptyFilesRule = (
   _: any,
   value: File[],
-  cb: (errors: any[]) => void,
+  cb: (errors: any[]) => void
 ) => {
   const errors = [];
 
   if (!value || value.length === 0) {
-    errors.push('Прикрепите документы');
+    errors.push("Прикрепите документы");
   }
 
   cb(errors);
@@ -85,7 +85,7 @@ export const isLengthBetween = (minLength: number, maxLength: number) => {
       rule: any[],
       value: string,
       callback: (errors: any[]) => void,
-      storeData?: any,
+      storeData?: any
     ) {
       const errors = [];
 
@@ -99,7 +99,7 @@ export const isLengthBetween = (minLength: number, maxLength: number) => {
 
       callback(errors);
     },
-    validateType: 'requiredValidator',
+    validateType: "requiredValidator"
   };
 };
 
@@ -108,13 +108,13 @@ export const limitLength = (value: string | number, limit = 19) =>
 
 export const oneOfLengths = (
   lengths: number[],
-  message = `Длина значения может быть ${lengths.join(' или ')} символов`,
+  message = `Длина значения может быть ${lengths.join(" или ")} символов`
 ) => createValidate(value => !lengths.includes(value.length), message);
 
 export const hasWords = (count: number, message: string) =>
   createValidate((value: string) => {
     if (value) {
-      const names = value.split(' ').filter(item => item !== '');
+      const names = value.split(" ").filter(item => item !== "");
       if (names.length >= count) {
         return false;
       }
@@ -127,17 +127,17 @@ export const moreThanZero = {
     rule: any[],
     value: any,
     callback: (errors: any[]) => void,
-    storeData?: any,
+    storeData?: any
   ) {
     const errors = [];
 
     if (!value || Number(value) <= 0) {
-      errors.push('Value must be more than 0');
+      errors.push("Value must be more than 0");
     }
 
     callback(errors);
   },
-  validateType: 'requiredValidator',
+  validateType: "requiredValidator"
 };
 
 export const mediaFile = {
@@ -145,19 +145,20 @@ export const mediaFile = {
     rule: any[],
     value: any,
     callback: (errors: any[]) => void,
-    storeData?: any,
+    storeData?: any
   ) {
     const errors = [];
-    const file = value[0]
-    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']
+    const file = value[0];
+
+    const allowedExtensions = ["jpg", "jpeg", "png", "gif", "mp3", "mp4", "mpeg4"];
 
     // file.size
 
     if (!allowedExtensions.find(e => file.type.indexOf(e) !== -1)) {
-      errors.push('Invalid file type');
+      errors.push("Invalid file type");
     }
 
     callback(errors);
   },
-  validateType: 'requiredValidator',
+  validateType: "requiredValidator"
 };

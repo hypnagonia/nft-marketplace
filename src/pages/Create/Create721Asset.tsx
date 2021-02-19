@@ -78,7 +78,7 @@ export class Create721Asset extends React.Component<any> {
             </Box>
 
             <FileInput
-              label="Upload File"
+              label={<>Upload File <span style={{fontSize: '14px'}}>PNG, GIF, WEBP, MP4 or MP3. Max 30mb</span></>}
               name="logo"
               rules={[
                 isRequired,

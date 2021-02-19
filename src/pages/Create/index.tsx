@@ -59,7 +59,7 @@ export const Create = () => {
               Create Collectibles
             </Title>
           </Box>
-          <Box style={{ background: "white", borderRadius: 5 }} pad="xlarge">
+          <Box style={{ minHeight: '300px', background: "white", borderRadius: 5 }} pad="xlarge">
 
             <Title>
             <span style={{ cursor: "pointer" }} onClick={openCreate721Modal}>

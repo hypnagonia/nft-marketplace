@@ -25,8 +25,9 @@ export const BaseContainer: React.FC<IStyledChildrenProps<
             width: '100vw',
             backgroundColor: '#F2F3F8', // palette.Basic100,
             // backgroundImage: "url('logo_background.svg')",
-            backgroundImage: "url('/harmony_logo_background.svg')",
-            backgroundPosition: '0 100%',
+            backgroundImage: "url('/bg-decor.svg')",
+            backgroundPosition: '5% 95%',
+            backgroundSize: '600px',
             backgroundRepeat: 'no-repeat',
           }}
         >
