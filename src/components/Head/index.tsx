@@ -50,7 +50,6 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
     const openConnectModal = () => {
       return actionModals.open(() => <WalletBalances />, {
         title: "Connect Your Wallet",
-        closeText: "Close",
         noValidation: true,
         width: "500px",
         showOther: true,

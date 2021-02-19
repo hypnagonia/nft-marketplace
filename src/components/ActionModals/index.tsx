@@ -6,7 +6,7 @@ import { Footer } from "../Footer";
 import { ActionModalConfig } from "stores/ActionModalsStore";
 import { useMemo, useRef } from "react";
 import { observable } from "mobx";
-import { ModalView, Button } from "components/Base";
+import { ModalView, Button, Icon } from "components/Base";
 
 export type TActionModalProps<T = any> = {
   config: ActionModalConfig;
@@ -80,6 +80,16 @@ export const ActionModal = observer<{
       style={{ visibility: visible ? "visible" : "hidden" }}
       config={config}
     >
+      <Icon
+        style={{
+          position: 'absolute',
+          right: '30px',
+          color: '#9698A7',
+          cursor: 'pointer'
+        }}
+        onClick={onClose}
+        glyph="Close" size="medium" />
+
       {false ? (
         <Header
           title={options.title}

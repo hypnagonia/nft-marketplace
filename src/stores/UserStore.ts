@@ -55,8 +55,8 @@ export class UserStoreEx extends StoreConstructor {
   @observable public hrc20Address = '';
   @observable public hrc20Balance = '';
 
-  @observable public isInfoReading = false;
-  @observable public isInfoNewReading = false;
+  @observable public isInfoReading = true;
+  @observable public isInfoNewReading = true;
 
   @observable metamaskChainId = 0;
 

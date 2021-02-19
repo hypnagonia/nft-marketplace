@@ -21,6 +21,7 @@ export const WalletButton = (props: any) => {
           borderRadius: 5,
           border: '1px solid #dedede',
           width: 180,
+          height: 48,
           textAlign: 'center',
         }}
         transparent={true}
