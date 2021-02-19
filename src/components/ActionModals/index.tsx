@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { observer } from 'mobx-react-lite';
-import { useStores } from 'stores';
-import { Header } from './components';
-import { Footer } from '../Footer';
-import { ActionModalConfig } from 'stores/ActionModalsStore';
-import { useMemo, useRef } from 'react';
-import { observable } from 'mobx';
-import { ModalView, Button } from 'components/Base';
+import * as React from "react";
+import { observer } from "mobx-react-lite";
+import { useStores } from "stores";
+import { Header } from "./components";
+import { Footer } from "../Footer";
+import { ActionModalConfig } from "stores/ActionModalsStore";
+import { useMemo, useRef } from "react";
+import { observable } from "mobx";
+import { ModalView, Button } from "components/Base";
 
 export type TActionModalProps<T = any> = {
   config: ActionModalConfig;
@@ -25,7 +25,7 @@ export type TActionDataType<T = any> = {
 function isClassComponent(component: any) {
   return (
     (!!component.prototype && !!component.prototype.isReactComponent) ||
-    typeof component !== 'function'
+    typeof component !== "function"
   );
 }
 
@@ -40,31 +40,31 @@ export const ActionModal = observer<{
     () =>
       observable({
         isValid: config.options.noValidation,
-        data: config.options.initData || {},
+        data: config.options.initData || {}
       }),
-    [],
+    []
   );
 
   const bodyRef = useRef<{ onValidate?: () => Promise<any> }>();
 
-  const { width = '750px', position = 'center' } = options;
+  const { width = "750px", position = "center" } = options;
 
   const onClose = () => actionModals.close(id);
 
-  const isActionLoading = config.actionStatus === 'fetching';
+  const isActionLoading = config.actionStatus === "fetching";
 
   const onApply = (data: any) => {
-    config.actionStatus = 'fetching';
+    config.actionStatus = "fetching";
 
     return options
       .onApply(data)
       .then(res => {
-        config.actionStatus = 'success';
+        config.actionStatus = "success";
 
         return res;
       })
       .catch((err: any) => {
-        config.actionStatus = 'error';
+        config.actionStatus = "error";
 
         throw err;
       });
@@ -77,7 +77,7 @@ export const ActionModal = observer<{
       width={width}
       position={position}
       onClose={onClose}
-      style={{ visibility: visible ? 'visible' : 'hidden' }}
+      style={{ visibility: visible ? "visible" : "hidden" }}
       config={config}
     >
       {false ? (
@@ -97,7 +97,7 @@ export const ActionModal = observer<{
           ref={bodyRef}
         />
       )}
-      <Footer>
+      {(options.closeText || options.applyText) && <Footer>
         {options.closeText && (
           <Button
             size="auto"
@@ -119,7 +119,7 @@ export const ActionModal = observer<{
                   .callback()
                   .then(onApply)
                   .catch((err: any) => {
-                    config.actionStatus = 'error';
+                    config.actionStatus = "error";
                     actionModals.rejectError(config.id, err);
                     throw err;
                   });
@@ -129,10 +129,11 @@ export const ActionModal = observer<{
             }}
             disabled={isActionLoading || !actionData.isValid}
           >
-            {options.applyText || 'Ok'}
+            {options.applyText || "Ok"}
           </Button>
         ) : null}
       </Footer>
+      }
     </ModalView>
   );
 });

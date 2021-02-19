@@ -73,7 +73,7 @@ export const ModalView: React.FC<
   onClose,
   style= {},
   children,
-  isOverlayClose,
+  isOverlayClose= true,
   config,
 }) => {
   const overlayRef = React.useRef(null);

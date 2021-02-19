@@ -22,7 +22,7 @@ export class Create721 extends React.Component<any> {
 
   render() {
     return (
-      <Box direction="row" justify="center" margin={{ bottom: "medium" }}>
+      <Box direction="row" justify="center">
         <Form
           ref={ref => (this.formRef = ref)}
           data={{
@@ -32,8 +32,9 @@ export class Create721 extends React.Component<any> {
         >
 
           <Box direction="column" fill={true}>
-
-            <Title>Create Collection</Title>
+            <Box direction="row" justify="center">
+              <Title>Create Collection</Title>
+            </Box>
 
             <FileInput
               label="Upload File"
@@ -43,7 +44,7 @@ export class Create721 extends React.Component<any> {
             <Input
               label="Display Name"
               name="name"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               placeholder="Token name"
               rules={[isRequired]}
             />
@@ -51,7 +52,7 @@ export class Create721 extends React.Component<any> {
             <Input
               label="Symbol"
               name="symbol"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               placeholder="Token symbol"
               rules={[isRequired]}
             />
@@ -59,27 +60,28 @@ export class Create721 extends React.Component<any> {
             <Input
               label="Description (optional)"
               name="description"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               placeholder="A few words about your token collection"
             />
 
             <Input
               label="Short URL"
               name="url"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               placeholder="URL"
               rules={[isRequired]}
             />
 
-
-            <Button
-              bgColor="#00ADE8"
-              style={{width: 220 }}
-              onClick={() => {
-              }}
-            >
-              Create Collection
-            </Button>
+            <Box direction="row" justify="center">
+              <Button
+                bgColor="#00ADE8"
+                style={{ width: 220, margin:10 }}
+                onClick={() => {
+                }}
+              >
+                Create Collection
+              </Button>
+            </Box>
           </Box>
 
         </Form>

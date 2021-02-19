@@ -90,3 +90,13 @@ export interface ITokenInfo {
   totalLockedUSD: string;
   type: 'erc20' | 'erc721' | 'hrc20';
 }
+
+
+export interface Collection {
+  name: string;
+  symbol: string;
+  address?: string;
+  description?: string;
+  image?: string;
+  baseURL?: string;
+}

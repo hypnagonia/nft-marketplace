@@ -16,10 +16,12 @@ import {
   Switch
 } from "components/Form";
 import { IStores } from "../../stores";
-import { moreThanZero } from "../../utils";
+import { moreThanZero, mediaFile } from "../../utils";
 import { observable } from "mobx";
 import { inject, observer } from "mobx-react";
+import { CollectionSelect } from "../../components/UI/CollectionSelect";
 
+@inject("collections")
 @observer
 export class Create721Asset extends React.Component<any> {
   formRef: MobxForm;
@@ -37,7 +39,8 @@ export class Create721Asset extends React.Component<any> {
     numberOfCopies: 1,
     props: [
       { name: "", value: "" }
-    ]
+    ],
+    collectionIndex: 0
   };
 
   checkPropsRecords = (val) => {
@@ -51,24 +54,45 @@ export class Create721Asset extends React.Component<any> {
   };
 
   render() {
+    const collections = this.props.collections.collections;
+
     return (
-      <Box direction="row" justify="center" margin={{ bottom: "medium" }}>
+      <Box direction="row" justify="center">
 
 
         <Form
           ref={ref => (this.formRef = ref)}
           data={this.formData}
           {...({} as any)}
-          onChange={values => console.log(values)}
         >
 
           <Box direction="column" fill={true}>
 
-            <Title>Create Collectible</Title>
+            <Box direction="row" justify="center">
+              <Title>Create Collectible</Title>
+            </Box>
 
             <FileInput
               label="Upload File"
               name="logo"
+              rules={[
+                isRequired,
+                mediaFile
+              ]}
+            />
+
+            <span style={{
+              marginBottom: "6px",
+              fontWeight: "bold",
+              color: "rgb(33, 45, 94)",
+              fontSize: "18px"
+            }}>Choose Collection</span>
+            <CollectionSelect
+              collections={collections}
+              value={this.formData.collectionIndex}
+              onChange={(value) => {
+                this.formData.collectionIndex = value;
+              }}
             />
 
             <Checkbox
@@ -86,12 +110,13 @@ export class Create721Asset extends React.Component<any> {
             />
 
             <Checkbox
-              style={{marginBottom:20}}
+              style={{ marginBottom: 20 }}
               size={200}
               isRowLabel={true}
               label="Unlock Once Purchased"
               name="unlockOncePurchased"
             />
+
 
             <Input
               label="Name"
@@ -181,17 +206,16 @@ export class Create721Asset extends React.Component<any> {
             ))
             }
 
-
-            <Button
-              bgColor="#00ADE8"
-              style={{ width: 220 }}
-              onClick={() => {
-              }}
-            >
-              Create Collectible
-            </Button>
-
-            {JSON.stringify(this.formData)}
+            <Box direction="row" justify="center">
+              <Button
+                bgColor="#00ADE8"
+                style={{ width: 220,  margin:10 }}
+                onClick={() => {
+                }}
+              >
+                Create Collectible
+              </Button>
+            </Box>
 
           </Box>
         </Form>

@@ -16,7 +16,7 @@ export const Create = () => {
   const openCreate721Modal = () => {
     return actionModals.open(() => <Create721 />, {
       title: "Connect Your Wallet",
-      closeText: "Close",
+      //closeText: "Close",
       noValidation: true,
       width: "600px",
       showOther: true,
@@ -29,7 +29,7 @@ export const Create = () => {
   const openCreate721AssetModal = () => {
     return actionModals.open(() => <Create721Asset />, {
       title: "Connect Your Wallet",
-      closeText: "Close",
+      //closeText: "Close",
       noValidation: true,
       width: "600px",
       showOther: true,
@@ -62,12 +62,12 @@ export const Create = () => {
           <Box style={{ background: "white", borderRadius: 5 }} pad="xlarge">
 
             <Title>
-            <span onClick={openCreate721Modal}>
+            <span style={{ cursor: "pointer" }} onClick={openCreate721Modal}>
               Create 721 Collection
             </span>
             </Title>
             <Title>
-              <span onClick={openCreate721AssetModal}>
+              <span style={{ cursor: "pointer" }} onClick={openCreate721AssetModal}>
               Create 721 Collectible
               </span>
             </Title>

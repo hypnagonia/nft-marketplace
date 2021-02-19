@@ -139,3 +139,25 @@ export const moreThanZero = {
   },
   validateType: 'requiredValidator',
 };
+
+export const mediaFile = {
+  validator(
+    rule: any[],
+    value: any,
+    callback: (errors: any[]) => void,
+    storeData?: any,
+  ) {
+    const errors = [];
+    const file = value[0]
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']
+
+    // file.size
+
+    if (!allowedExtensions.find(e => file.type.indexOf(e) !== -1)) {
+      errors.push('Invalid file type');
+    }
+
+    callback(errors);
+  },
+  validateType: 'requiredValidator',
+};
