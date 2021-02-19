@@ -21,7 +21,7 @@ export const FileUploader = ({ amount, onClearClick, ...rest }: IFileUploaderPro
       >
         <Icon glyph="PrintFormDownload" color="Basic500" margin={{ bottom: 'xsmall' }} />
         <Title bold size="xxsmall" color="Basic500">
-          Choose a File
+          Browse...
         </Title>
       </div>
     )}
