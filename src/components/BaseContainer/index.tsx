@@ -29,6 +29,7 @@ export const BaseContainer: React.FC<IStyledChildrenProps<
             backgroundPosition: '5% 95%',
             backgroundSize: '600px',
             backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed'
           }}
         >
           <Head />
