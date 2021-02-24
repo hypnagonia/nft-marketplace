@@ -158,6 +158,13 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
               <Text>FAQ</Text>
             </Box>*/}
 
+            <Box
+              className={cn(styles.itemToken)}
+            >
+              <Text>
+                <a target="_blank" href="https://davinci-1.gitbook.io/davinci">Documentation</a>
+              </Text>
+            </Box>
 
             {(true || user.isAuthorized) &&
             <Box

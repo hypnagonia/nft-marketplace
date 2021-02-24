@@ -59,20 +59,41 @@ export const Create = () => {
               Create Collectibles
             </Title>
           </Box>
-          <Box style={{ minHeight: '300px', background: "white", borderRadius: 5 }} pad="xlarge">
+          <Box justify="center" style={{ minHeight: "300px", background: "white", borderRadius: 5 }} pad="xlarge">
+            <Box justify="center" style={{ width: "650px", textAlign: 'center', margin:'auto' }}>
+              <Box>
+                <Text>
+                  Choose “Single” if you want your collectible to be one of a kind or “Multiple” if you want to sell one
+                  collectible multiple times
+                </Text>
 
-            <Title>
-            <span style={{ cursor: "pointer" }} onClick={openCreate721Modal}>
-              Create 721 Collection
-            </span>
-            </Title>
-            <Title>
-              <span style={{ cursor: "pointer" }} onClick={openCreate721AssetModal}>
-              Create 721 Collectible
-              </span>
-            </Title>
+              </Box>
 
+              <Box
+                style={{marginTop: '20px', marginBottom: '20px'}}
+                justify="center"
+                direction="row">
+                <Box className={styles.collectionType} onClick={openCreate721AssetModal}>
+
+                  <img className={styles.collectionTypeImage} src="/single.svg" />
+
+                  Single
+                </Box>
+                <Box className={styles.collectionType} onClick={openCreate721AssetModal}>
+
+                  <img className={styles.collectionTypeImage} src="/multiple.svg" />
+
+                  Mupltiple
+                </Box>
+              </Box>
+              <Box>
+                <Text>
+                  We do not own your private keys and cannot access your funds without your confirmation
+                </Text>
+              </Box>
+            </Box>
           </Box>
+
         </Box>
       </PageContainer>
     </BaseContainer>
