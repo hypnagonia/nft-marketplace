@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import {imageExtensions, audioExtensions, videoExtensions} from '../constants/extensionTypes'
 
 export function createValidate(
   func: (value: any, data?: any) => boolean,
@@ -140,9 +141,6 @@ export const moreThanZero = {
   validateType: "requiredValidator"
 };
 
-const imageExtensions = ["jpg", "jpeg", "png", "gif"]
-const audioExtensions = ["mp3"]
-const videoExtensions = [ "mp4", "mpeg4"]
 
 export const mediaFile = {
   validator(

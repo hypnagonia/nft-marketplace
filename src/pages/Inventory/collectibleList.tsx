@@ -6,7 +6,7 @@ import * as styles from "./collectibleList.styl";
 import { PageContainer } from "components/PageContainer";
 import { BaseContainer } from "components/BaseContainer";
 import { Icon } from "components/Base/components/Icons";
-
+import {MediaAsset} from '../../components/UI/MediaAsset'
 import { useStores } from "../../stores";
 import cn from "classnames";
 
@@ -32,8 +32,7 @@ export const CollectibleList = ({ items }: any) => {
           className={cn(styles.cardContainer, '')}
    >
 
-          <img className={styles.collectionImage} src={c.image} />
-
+          <MediaAsset url={c.image} />
 
           <Box className={styles.cardDescriotion} direction="column" align="start" justify="start">
           <div className={styles.name}>{c.name}</div>

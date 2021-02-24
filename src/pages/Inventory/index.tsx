@@ -27,8 +27,22 @@ let items = [
     name: 'Everything you say will be used against you',
     price: '5',
     currency: 'ONE'
+  },
+  {
+    image: 'https://stream.mux.com/WsSZyuWY00vEViXuZijLpQsNORaA02elNQxgvWlITE8Cw/medium.mp4',
+    name: 'Stone Push Study',
+    price: '100',
+    currency: 'ONE'
+  },
+  {
+  image: 'https://f8n-ipfs-production.imgix.net/QmdPV5HuS5qmiTGwUKJRXVxLjgLqtFvXDRmYqsLRvhPUjr/nft.png?auto=format&h=640&q=80&resolution=medium',
+    name: '100 Seconds To Midnight',
+    price: '1',
+    currency: 'ONE'
   }
 ]
+
+
 items = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items]
 
 export const Inventory = () => {
