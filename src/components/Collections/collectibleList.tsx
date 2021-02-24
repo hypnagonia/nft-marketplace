@@ -12,9 +12,7 @@ import cn from "classnames";
 
 
 export const CollectibleList = ({ items }: any) => {
-  const {  actionModals } = useStores();
-
-
+  const {  routing } = useStores();
 
   return (
     <Box
@@ -28,7 +26,7 @@ export const CollectibleList = ({ items }: any) => {
       {items.map((c, i) => (
         <Box
           key={c.symbol + c.name}
-          onClick={()=>{}}
+          onClick={()=>routing.push("/collectible/1")}
           className={cn(styles.cardContainer, '')}
    >
 

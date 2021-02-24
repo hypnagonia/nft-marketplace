@@ -29,4 +29,4 @@ export const MediaAsset = ({ url }: any) => {
       {type === 'video' && <video autoPlay className={styles.collectionImage} src={url} />}
     </>
   );
-};
+}

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Box } from "grommet";
 import { Title, Text } from "components/Base";
-import * as styles from "./inventoryPage.styl";
+import * as styles from "./styles.styl";
 import { PageContainer } from "components/PageContainer";
 import { BaseContainer } from "components/BaseContainer";
-import { Icon } from "components/Base/components/Icons";
 import {CollectibleList} from "../../components/Collections/collectibleList";
-import { WalletBalances } from "../EthBridge/WalletBalances";
 import { useStores } from "../../stores";
 
 let items = [
@@ -45,7 +43,7 @@ let items = [
 
 items = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items]
 
-export const Inventory = () => {
+export const CollectibleListPage = () => {
   const { routing, user, exchange, actionModals } = useStores();
 
   return (
@@ -63,7 +61,7 @@ export const Inventory = () => {
               }}
               size="large"
             >
-              Inventory
+              Collectibles
             </Title>
           </Box>
 

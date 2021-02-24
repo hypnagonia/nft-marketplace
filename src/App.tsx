@@ -10,6 +10,9 @@ import { MintTokens } from './pages/MintTokens';
 import { Tokens } from './pages/Tokens';
 import { Create } from './pages/Create';
 import {Inventory} from './pages/Inventory'
+import {CollectibleListPage} from './pages/CollectibleList'
+import {CollectibleDetailPage} from './pages/CollectibleDetails'
+
 import { InfoModal } from './components/InfoModal';
 import { FAQPage } from './pages/FAQ';
 import { InfoPage } from './pages/Info';
@@ -29,6 +32,8 @@ export const App: React.FC = () => (
         <Route exact path="/faq" component={FAQPage} />
         <Route exact path="/create" component={Create} />
         <Route exact path="/inventory" component={Inventory} />
+        <Route exact path="/" component={CollectibleListPage} />
+        <Route exact path="/collectible/:ud" component={CollectibleDetailPage} />
 
         <Route exact path="/info" component={InfoPage} />
         <Route exact path="/explorer" component={Explorer} />
@@ -38,7 +43,7 @@ export const App: React.FC = () => (
           path="/:token/operations/:operationId"
           component={EthBridge}
         />
-        <Redirect to="/create" />
+        <Redirect to="/" />
       </Switch>
     </React.Suspense>
     <ActionModals />

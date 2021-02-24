@@ -82,7 +82,7 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
             <Box
               align="center"
               margin={{ right: "small" }}
-              onClick={()=> routing.push(`/create`)}
+              onClick={()=> routing.push(`/`)}
             >
               <MainLogo src="/daVinci_black.svg" />
             </Box>
