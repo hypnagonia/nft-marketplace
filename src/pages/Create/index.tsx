@@ -75,13 +75,13 @@ export const Create = () => {
                 direction="row">
                 <Box className={styles.collectionType} onClick={openCreate721AssetModal}>
 
-                  <img className={styles.collectionTypeImage} src="/single.svg" />
+                  <img className={styles.collectionTypeImage} src="/davinciCards_single.svg" />
 
                   Single
                 </Box>
                 <Box className={styles.collectionType} onClick={openCreate721AssetModal}>
 
-                  <img className={styles.collectionTypeImage} src="/multiple.svg" />
+                  <img className={styles.collectionTypeImage} src="/davinciCards_multiple.svg" />
 
                   Mupltiple
                 </Box>

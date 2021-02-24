@@ -9,9 +9,11 @@ import { Explorer } from './pages/Explorer';
 import { MintTokens } from './pages/MintTokens';
 import { Tokens } from './pages/Tokens';
 import { Create } from './pages/Create';
+import {Inventory} from './pages/Inventory'
 import { InfoModal } from './components/InfoModal';
 import { FAQPage } from './pages/FAQ';
 import { InfoPage } from './pages/Info';
+
 // import { TransactionExample, Hrc20ContractExample } from './pages/Examples';
 
 export const App: React.FC = () => (
@@ -26,6 +28,8 @@ export const App: React.FC = () => (
         <Route exact path="/hrc20-example" component={Hrc20ContractExample} />*/}
         <Route exact path="/faq" component={FAQPage} />
         <Route exact path="/create" component={Create} />
+        <Route exact path="/inventory" component={Inventory} />
+
         <Route exact path="/info" component={InfoPage} />
         <Route exact path="/explorer" component={Explorer} />
         <Route exact path="/:token" component={EthBridge} />

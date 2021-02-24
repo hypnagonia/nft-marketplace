@@ -34,17 +34,9 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
     const isFaq = history.location.pathname === "/faq";
     const isInfo = history.location.pathname === "/info";
 
-    const goToBridge = () => {
-      if (exchange.operation && exchange.operation.id) {
-        routing.push(
-          `/${exchange.token || TOKEN.BUSD}/operations/${
-            exchange.operation.id
-          }`
-        );
-      } else {
-        routing.push(`/${exchange.token || TOKEN.BUSD}`);
-      }
-    };
+    const isInventory = history.location.pathname === "/inventory";
+    const isCreate = history.location.pathname === "/create";
+
 
 
     const openConnectModal = () => {
@@ -90,7 +82,7 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
             <Box
               align="center"
               margin={{ right: "small" }}
-              onClick={goToBridge}
+              onClick={()=> routing.push(`/create`)}
             >
               <MainLogo src="/daVinci_black.svg" />
             </Box>
@@ -168,7 +160,7 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
 
             {(true || user.isAuthorized) &&
             <Box
-              className={cn(styles.itemToken, styles.selected)}
+              className={cn(styles.itemToken,  isCreate ? styles.selected : "")}
               onClick={() => routing.push("/create")}
             >
               <Text>Create</Text>
@@ -177,8 +169,9 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
 
             {(user.isAuthorized) &&
             <Box
-              className={cn(styles.itemToken, "")}
+              className={cn(styles.itemToken,  isInventory ? styles.selected : "")}
               onClick={() => {
+                routing.push("/inventory")
               }}
             >
               <Text>Inventory</Text>
