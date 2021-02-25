@@ -25,7 +25,7 @@ export const CollectibleList = ({ items }: any) => {
 
       {items.map((c, i) => (
         <Box
-          key={c.symbol + c.name}
+          key={c.symbol + c.name + i}
           onClick={()=>routing.push("/collectible/1")}
           className={cn(styles.cardContainer, '')}
    >

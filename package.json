@@ -26,6 +26,7 @@
     "eth-sig-util": "^2.5.3",
     "ethjs": "^0.4.0",
     "grommet": "^2.8.1",
+    "ipfs-http-client": "^49.0.2",
     "lodash": "^4.17.15",
     "mobx": "5.15.0",
     "mobx-react": "6.1.4",

@@ -11,12 +11,6 @@ import { useStores } from "../../stores";
 
 let items = [
   {
-    image: 'https://lh3.googleusercontent.com/e-sryBKHxsL8EHCE6g_GQL92kogQtPZ9jcq3vmsemDNdD37sc8lQn_8TT4Tq19jv4FtJYIkdSzoy0njZqLNoaZo=s250',
-    name: 'Mother Playground',
-    price: '1.2',
-    currency: 'ONE'
-  },
-  {
     image: 'https://lh3.googleusercontent.com/GmRKisMCrJDDIHP1XQdkXZzlgyn5xULaTKyqzT_wR_6nBJ12r4f7euftaHX7BY6jc1ntx6qNc7tnctjbUPLpWfuDFgRoPOgbZhHGBw=s250',
     name: 'Blue Ethereum',
     price: '0.2',
@@ -42,8 +36,6 @@ let items = [
   }
 ]
 
-
-items = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items]
 
 export const Inventory = () => {
   const { routing, user, exchange, actionModals } = useStores();

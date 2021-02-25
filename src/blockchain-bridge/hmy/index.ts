@@ -7,6 +7,9 @@ import { HmyMethodsERC20 } from './HmyMethodsERC20';
 import { HmyMethodsHRC20 } from './HmyMethodsHRC20';
 import { HmyMethodsERC20Web3 } from './HmyMethodsERC20Web3';
 import { HmyMethodsHRC20Web3 } from './HmyMethodsHRC20Web3';
+
+import {DeployNFT} from './DeployNFT'
+
 const { Harmony } = require('@harmony-js/core');
 const { ChainType } = require('@harmony-js/utils');
 
@@ -175,3 +178,9 @@ export const hmyMethodsDeposit = {
   hmyMethods: hmyMethodsDepositHmy,
   hmyMethodsWeb3: hmyMethodsDepositWeb3,
 };
+
+// NFT
+
+export const deployNFT = new DeployNFT({
+  hmy: hmy,
+})

@@ -15,19 +15,41 @@ import {
 } from "components/Form";
 import { IStores } from "../../stores";
 import { imageFile, moreThanZero } from "../../utils";
+import { deployNFT } from "../../blockchain-bridge/hmy/index";
+import { inject } from "mobx-react";
+import { observable } from "mobx";
 
-
+@inject("user", "exchange", "actionModals", "userMetamask", "routing")
 export class Create721 extends React.Component<any> {
   formRef: MobxForm;
+  @observable formData = {
+    royalties: 10,
+    name: "",
+    description: "",
+    symbol: "",
+  };
+
+  submit = async () => {
+    const isMetamask = this.props.user.isMetamask;
+    const deployNewToken = deployNFT.deployERC721(isMetamask);
+
+
+    try {
+      await this.formRef.validateFields();
+      console.log(this.formData)
+      const {name, symbol} = this.formData
+      await deployNewToken(name, symbol);
+    } catch (e) {
+      return
+    }
+  };
 
   render() {
     return (
       <Box direction="row" justify="center">
         <Form
           ref={ref => (this.formRef = ref)}
-          data={{
-            royalties: 10
-          }}
+          data={this.formData}
           {...({} as any)}
         >
 
@@ -37,11 +59,11 @@ export class Create721 extends React.Component<any> {
             </Box>
 
             <FileInput
-              label={<>Upload File <span style={{fontSize: '14px'}}>We recommend an image of at least 400x400. Gifs work too.</span></>}
+              label={<>Upload File <span style={{ fontSize: "14px" }}>We recommend an image of at least 400x400. Gifs work too.</span></>}
               name="logo"
               rules={[
-                isRequired,
-                imageFile
+                // isRequired,
+                // imageFile
               ]}
             />
 
@@ -68,19 +90,20 @@ export class Create721 extends React.Component<any> {
               placeholder="A few words about your token collection"
             />
 
-            <Input
+            {/*<Input
               label="Short URL"
               name="url"
               style={{ width: "100%" }}
               placeholder="URL"
               rules={[isRequired]}
-            />
+            />*/}
 
             <Box direction="row" justify="center">
               <Button
                 bgColor="#00ADE8"
-                style={{ width: 220, margin:10 }}
+                style={{ width: 220, margin: 10 }}
                 onClick={() => {
+                  this.submit()
                 }}
               >
                 Create Collection
