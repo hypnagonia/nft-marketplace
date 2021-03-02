@@ -12,6 +12,10 @@ import { TOKEN } from "../../stores/interfaces";
 // import { formatWithTwoDecimals } from '../../utils';
 import { ModalView } from "../Base/components/ModalView";
 import { WalletBalances } from "../../pages/EthBridge/WalletBalances";
+import { getBech32Address } from "../../blockchain-bridge";
+import { formatWithZeroDecimals, ones, truncateAddressString } from "utils";
+import { SliceTooltip } from "../../ui";
+import { Icon } from "../Base";
 
 const MainLogo = styled.img`
   width: auto;
@@ -20,6 +24,7 @@ const MainLogo = styled.img`
 `;
 
 const getTokenServiceEnable = process.env.GET_TOKENS_SERVICE === "true";
+
 
 export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
   observer(({ theme, ...props }: IStyledChildrenProps<BoxProps>) => {
@@ -37,7 +42,7 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
     const isInventory = history.location.pathname === "/inventory";
     const isCreate = history.location.pathname === "/create";
 
-
+    console.log({user})
 
     const openConnectModal = () => {
       return actionModals.open(() => <WalletBalances />, {
@@ -82,7 +87,7 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
             <Box
               align="center"
               margin={{ right: "small" }}
-              onClick={()=> routing.push(`/`)}
+              onClick={() => routing.push(`/`)}
             >
               <MainLogo src="/daVinci_black.svg" />
             </Box>
@@ -160,21 +165,32 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
 
             {(true || user.isAuthorized) &&
             <Box
-              className={cn(styles.itemToken,  isCreate ? styles.selected : "")}
-              onClick={() => routing.push("/create")}
+                className={cn(styles.itemToken, isCreate ? styles.selected : "")}
+                onClick={() => routing.push("/create")}
             >
-              <Text>Create</Text>
+              <Text>Create NFT</Text>
             </Box>
             }
 
             {(user.isAuthorized) &&
             <Box
-              className={cn(styles.itemToken,  isInventory ? styles.selected : "")}
-              onClick={() => {
-                routing.push("/inventory")
-              }}
+                className={cn(styles.itemToken, isInventory ? styles.selected : "")}
+                onClick={() => {
+                  routing.push("/inventory");
+                }}
             >
-              <Text>Inventory</Text>
+              <Text>My Inventory</Text>
+            </Box>
+            }
+
+            {(user.isAuthorized) &&
+            <Box
+                className={cn(styles.itemToken, isInventory ? styles.selected : "")}
+                onClick={() => {
+                  routing.push("/inventory");
+                }}
+            >
+              <Text><b>{formatWithZeroDecimals(user.hmyBUSDBalance)}</b>&nbsp;VINCI</Text>
             </Box>
             }
 

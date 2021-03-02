@@ -6,6 +6,26 @@ import erc721json from "../../abi/DavinciToken.json";
 
 
 const BN = require("bn.js");
+// https://ipfs.infura.io:5001
+const ipfsClient = require("ipfs-http-client")({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https"
+});
+
+const a = async () => {
+  const b = new Blob("aaaaaaa2323232323323asdasdadadajbdabhdakjdasjkdasdkajhadskhaskdhsakdhaskahsdbdjkfbsjdkfbkjbfjkdbfjksdbfkjdsbfjbafj1111222223333344445666661636123612363162136136213213".split(""));
+
+  try {
+    const ipfsResult = await ipfsClient.add(b);
+    console.log({ ipfsResult });
+  } catch (e) {
+    console.log({ e });
+  }
+};
+a()
+
+
 
 const defaultBaseUrl = 'https://gateway.pinata.cloud/ipfs/'
 

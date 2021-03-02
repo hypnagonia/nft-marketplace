@@ -55,7 +55,7 @@ export const Inventory = () => {
               }}
               size="large"
             >
-              Inventory
+              My Inventory
             </Title>
           </Box>
 

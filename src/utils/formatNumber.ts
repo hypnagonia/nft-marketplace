@@ -24,6 +24,10 @@ export function formatWithTwoDecimals(value: number | string) {
   return twoDecimalsFormatter.format(Number(value));
 }
 
+export function formatWithZeroDecimals(value: number | string) {
+  return zeroDecimalsFormatter.format(Number(value));
+}
+
 export function formatWithSixDecimals(value: number | string) {
   return sixDecimalsFormatter.format(Number(value));
 }

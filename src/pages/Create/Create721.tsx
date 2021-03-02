@@ -16,29 +16,33 @@ import {
 import { IStores } from "../../stores";
 import { imageFile, moreThanZero } from "../../utils";
 import { deployNFT } from "../../blockchain-bridge/hmy/index";
-import { inject } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
 
+const initialFormData = {
+  royalties: 10,
+  name: "",
+  description: "",
+  symbol: "",
+};
+
 @inject("user", "exchange", "actionModals", "userMetamask", "routing")
+@observer
 export class Create721 extends React.Component<any> {
   formRef: MobxForm;
-  @observable formData = {
-    royalties: 10,
-    name: "",
-    description: "",
-    symbol: "",
-  };
+  @observable formData = initialFormData
 
   submit = async () => {
     const isMetamask = this.props.user.isMetamask;
     const deployNewToken = deployNFT.deployERC721(isMetamask);
 
-
+    // todo notifications
     try {
       await this.formRef.validateFields();
       console.log(this.formData)
       const {name, symbol} = this.formData
-      await deployNewToken(name, symbol);
+      // await deployNewToken(name, symbol);
+      this.formData = initialFormData
     } catch (e) {
       return
     }
