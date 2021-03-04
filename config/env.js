@@ -68,6 +68,9 @@ function getClientEnvironment(publicUrl) {
 
         PRIVATE_KEY: process.env.PRIVATE_KEY,
 
+        HRC721_FACTORY: process.env.HRC721_FACTORY,
+        HRC1155_FACTORY: process.env.HRC1155_FACTORY,
+
         ETH_BUSD_CONTRACT: process.env.ETH_BUSD_CONTRACT,
         ETH_BUSD_MANAGER_CONTRACT: process.env.ETH_BUSD_MANAGER_CONTRACT,
         HMY_BUSD_CONTRACT: process.env.HMY_BUSD_CONTRACT,

@@ -42,7 +42,9 @@ export const CollectionSelect = ({ collections, onChange, value }: ICollectionSe
       gap={"50x"}
     >
 
-      <Box className={styles.cardContainer} style={{ background: "white", borderRadius: 5 }}
+      <Box
+        key="new_collectible"
+        className={styles.cardContainer} style={{ background: "white", borderRadius: 5 }}
         onClick={openCreate721Modal}
       >
         <Icon glyph={"Plus"} className={styles.plus}/>

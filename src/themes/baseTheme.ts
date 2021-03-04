@@ -215,7 +215,7 @@ export const baseTheme: any = {
 
   container: {
     minWidth: '300px',
-    maxWidth: '1200px',
+    maxWidth: '100%',
   },
 
   styled: {

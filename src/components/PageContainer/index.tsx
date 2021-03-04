@@ -19,7 +19,8 @@ export const PageContainer: React.FC<IStyledChildrenProps<BoxProps>> =
           flexDirection: 'column',
           // backgroundColor: theme.palette.Basic100,
           justifyContent: 'normal',
-          padding: '0px 10px',
+          // padding: '0px 10px',
+          marginTop: '10px'
         }}
       >
         {children}

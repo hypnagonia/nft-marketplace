@@ -5,6 +5,8 @@ import * as styles from "./create-styles.styl";
 import { PageContainer } from "components/PageContainer";
 import { BaseContainer } from "components/BaseContainer";
 import { Icon } from "components/Base/components/Icons";
+import { ExplorerTransactionLink } from "../../components/ExplorerLink";
+
 import {
   FileInput,
   Form,
@@ -18,19 +20,25 @@ import { imageFile, moreThanZero } from "../../utils";
 import { deployNFT } from "../../blockchain-bridge/hmy/index";
 import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
+import { uploadImage, uploadCollectionMeta } from "../../services/ipfs";
+import { ipfsGateway } from "../../services/ipfs/ipfsClient";
+
 
 const initialFormData = {
   royalties: 10,
   name: "",
   description: "",
   symbol: "",
+  logo: null
 };
 
 @inject("user", "exchange", "actionModals", "userMetamask", "routing")
 @observer
 export class Create721 extends React.Component<any> {
   formRef: MobxForm;
-  @observable formData = initialFormData
+  @observable formData = initialFormData;
+  isFormSent = true;
+  txHash: String = "sss";
 
   submit = async () => {
     const isMetamask = this.props.user.isMetamask;
@@ -39,16 +47,38 @@ export class Create721 extends React.Component<any> {
     // todo notifications
     try {
       await this.formRef.validateFields();
-      console.log(this.formData)
-      const {name, symbol} = this.formData
-      // await deployNewToken(name, symbol);
-      this.formData = initialFormData
+      const { name, symbol, description, logo } = this.formData;
+
+      console.log(this.formData);
+      const image = await uploadImage(logo[0]);
+      const meta = await uploadCollectionMeta({ name, image, description });
+
+      await deployNewToken(name, symbol, meta, ipfsGateway);
+      this.formData = initialFormData;
     } catch (e) {
-      return
+      return;
     }
   };
 
   render() {
+    const { isFormSent, txHash } = this;
+
+    if (isFormSent) {
+      return (
+        <Box direction="column" justify="center" align="center">
+          <Text>
+            <Icon size="50" style={{ width: 50 }} glyph="CheckMark" />
+          </Text>
+          <Text>
+            Collection has been successfully created!
+          </Text>
+          <Text>
+            <ExplorerTransactionLink hash={txHash} />
+          </Text>
+        </Box>
+      );
+    }
+
     return (
       <Box direction="row" justify="center">
         <Form
@@ -107,7 +137,7 @@ export class Create721 extends React.Component<any> {
                 bgColor="#00ADE8"
                 style={{ width: 220, margin: 10 }}
                 onClick={() => {
-                  this.submit()
+                  this.submit();
                 }}
               >
                 Create Collection

@@ -3,31 +3,13 @@ import { connectToOneWallet } from "./helpers";
 import { mulDecimals } from "../../utils";
 import { web3 } from "../eth";
 import erc721json from "../../abi/DavinciToken.json";
+import hrc721Factory from "../../abi/DavinciTokenFactory.json";
 
+import {ipfsGateway} from '../../services/ipfs/ipfsClient'
 
 const BN = require("bn.js");
-// https://ipfs.infura.io:5001
-const ipfsClient = require("ipfs-http-client")({
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https"
-});
 
-const a = async () => {
-  const b = new Blob("aaaaaaa2323232323323asdasdadadajbdabhdakjdasjkdasdkajhadskhaskdhsakdhaskahsdbdjkfbsjdkfbkjbfjkdbfjksdbfkjdsbfjbafj1111222223333344445666661636123612363162136136213213".split(""));
-
-  try {
-    const ipfsResult = await ipfsClient.add(b);
-    console.log({ ipfsResult });
-  } catch (e) {
-    console.log({ e });
-  }
-};
-a()
-
-
-
-const defaultBaseUrl = 'https://gateway.pinata.cloud/ipfs/'
+const defaultBaseUrl = ipfsGateway
 
 interface InitParams {
   hmy: Harmony;
@@ -50,52 +32,41 @@ export class DeployNFT {
   deployERC721 = isMetamask => isMetamask ? this.deployERC721Web3 : this.deployERC721Hmy;
 
 
-  private deployERC721Hmy = (name, symbol, contractURI = defaultBaseUrl, baseURI = defaultBaseUrl, tokenURIPrefix = "") => {
+  private deployERC721Hmy = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl) => {
     return new Promise(async (resolve, reject) => {
-      const hmyTokenContract = this.hmy.contracts.createContract(
-        erc721json.abi
-      );
 
+      const hmyTokenContract = this.hmy.contracts.createContract(
+        hrc721Factory.abi,
+        process.env.HRC721_FACTORY
+      );
 
       try {
         // @ts-ignore
         await connectToOneWallet(hmyTokenContract.wallet, null, reject);
-        const ownerAddress = hmyTokenContract.wallet.defaultSigner
-
-        console.log(hmyTokenContract.wallet, hmyTokenContract.wallet.defaultSigner)
-
-
         const res = await hmyTokenContract
-          .deploy({
-            data: erc721json.bytecode,
-            // string memory name, string memory symbol, address newOwner, string memory contractURI, string memory tokenURIPrefix
-            arguments: [name, symbol, ownerAddress, contractURI, tokenURIPrefix]
-          })
-          .send(this.options);
+          .methods
+          .createDavinciToken(name, symbol, contractURI, tokenBaseURI)
+          .send(this.options)
+          .on('transactionHash', (...a)=>console.log('sendTxCallback', a));
 
-
-        console.log({ res });
         resolve(res);
       } catch (e) {
-        console.log("something wrong", e);
+        console.log("deployERC721Hmy something wrong", e);
         reject(e);
       }
     });
   };
 
-  private deployERC721Web3 = (name, symbol, contractURI = defaultBaseUrl, baseURI = defaultBaseUrl, tokenURIPrefix = "") => {
+  private deployERC721Web3 = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl) => {
     return new Promise(async (resolve, reject) => {
       try {
         // @ts-ignore
         const accounts = await ethereum.enable();
-        const erc721Contract = new web3.eth.Contract(erc721json.abi);
-        const ownerAddress = accounts[0]
+        const erc721Contract = new web3.eth.Contract(erc721json.abi,   process.env.HRC721_FACTORY);
 
         const res = await erc721Contract
-          .deploy({
-            data: erc721json.bytecode,
-            arguments: [name, symbol, ownerAddress, contractURI, tokenURIPrefix]
-          })
+          .methods
+          .createDavinciToken(name, symbol, contractURI, tokenBaseURI)
           .send({
             from: accounts[0],
             gas: process.env.GAS_LIMIT,
@@ -103,7 +74,7 @@ export class DeployNFT {
           });
         resolve(res);
       } catch (e) {
-        console.log("something wrong", e);
+        console.log("deployERC721 something wrong", e);
         reject(e);
       }
     });

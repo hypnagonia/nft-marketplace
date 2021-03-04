@@ -29,7 +29,8 @@ export const BaseContainer: React.FC<IStyledChildrenProps<
             backgroundPosition: '5% 95%',
             backgroundSize: '600px',
             backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed'
+            backgroundAttachment: 'fixed',
+            overflowX: 'hidden'
           }}
         >
           <Head />
@@ -37,7 +38,9 @@ export const BaseContainer: React.FC<IStyledChildrenProps<
             style={{
               minWidth,
               maxWidth,
-              margin: '120px auto 20px',
+              margin: 0,
+              padding: 0
+              // margin: '120px auto 20px',
             }}
             {...props}
           >

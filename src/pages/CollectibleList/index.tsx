@@ -61,7 +61,7 @@ export const CollectibleListPage = () => {
               }}
               size="large"
             >
-              Collectibles
+              A new generation of art is emerging, collect it here
             </Title>
           </Box>
 

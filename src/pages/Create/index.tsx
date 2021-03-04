@@ -83,7 +83,7 @@ export const Create = () => {
 
                   <img className={styles.collectionTypeImage} src="/davinciCards_multiple.svg" />
 
-                  Mupltiple
+                  Multiple
                 </Box>
               </Box>
               <Box>

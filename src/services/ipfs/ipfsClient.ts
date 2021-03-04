@@ -1,22 +1,18 @@
-// not implemented
-
-/*
-
-const ipfsClient = require("ipfs-http-client")({
-  host: "127.0.0.1",
+// todo move settings to config
+export const ipfsClient = require("ipfs-http-client")({
+  host: "ipfs.infura.io",
   port: 5001,
-  protocol: "http"
+  protocol: "https"
 });
 
-const a = async () => {
-  const b = new Blob("abc".split(""));
+export const get = hash => {
+  // todo
+  return ''
+}
 
-  try {
-    const ipfsResult = await ipfsClient.add(b);
-    console.log({ ipfsResult });
-  } catch (e) {
-    console.log({ e });
-  }
-};
+export const add = async data => {
+  const res = await ipfsClient.add(data);
+  return res
+}
 
-*/
+export const ipfsGateway = 'https://ipfs.io/ipfs/'
