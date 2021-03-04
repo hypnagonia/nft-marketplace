@@ -93,6 +93,7 @@ export class Create721Asset extends React.Component<any> {
               fontSize: "18px"
             }}>Choose Collection</span>
             <CollectionSelect
+              type={this.props.type}
               collections={collections}
               value={this.formData.collectionIndex}
               onChange={(value) => {

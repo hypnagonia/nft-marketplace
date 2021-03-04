@@ -35,6 +35,7 @@ export class DeployNFT {
     : isMetamask => isMetamask ? this.deployERC1155Web3 : this.deployERC1155Hmy
 
   private deployERC721Hmy = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl, cb) => {
+    console.log('721')
     return new Promise(async (resolve, reject) => {
 
       const hmyTokenContract = this.hmy.contracts.createContract(

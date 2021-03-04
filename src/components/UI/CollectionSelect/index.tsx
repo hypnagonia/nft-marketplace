@@ -15,17 +15,18 @@ export type ICollectionSelect = {
   collections: Collection[]
   onChange: (value: number) => void
   value: number
+  type: 'hrc721' | 'hrc1155'
 }
 
 
-export const CollectionSelect = ({ collections, onChange, value }: ICollectionSelect) => {
+export const CollectionSelect = ({ collections, onChange, value, type }: ICollectionSelect) => {
   const {  actionModals } = useStores();
 
   const openCreate721Modal = () => {
-    return actionModals.open(() => <Create721 />, {
+    return actionModals.open(() => <Create721 type={type} />, {
       title: "",
       noValidation: true,
-      width: "600px",
+      width: "700px",
       showOther: true,
       onApply: () => {
         return Promise.resolve();

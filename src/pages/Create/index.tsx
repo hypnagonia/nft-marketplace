@@ -13,25 +13,13 @@ import { useStores } from "../../stores";
 export const Create = () => {
   const { routing, user, exchange, actionModals } = useStores();
 
-  const openCreate721Modal = () => {
-    return actionModals.open(() => <Create721 />, {
-      title: "Connect Your Wallet",
-      //closeText: "Close",
-      noValidation: true,
-      width: "600px",
-      showOther: true,
-      onApply: () => {
-        return Promise.resolve();
-      }
-    });
-  };
 
   const openCreate721AssetModal = (type: 'hrc721' | 'hrc1155') => {
     return actionModals.open(() => <Create721Asset type={type} />, {
       title: "Connect Your Wallet",
       //closeText: "Close",
       noValidation: true,
-      width: "600px",
+      width: "700px",
       showOther: true,
       onApply: () => {
         return Promise.resolve();
