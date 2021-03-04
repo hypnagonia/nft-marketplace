@@ -37,31 +37,73 @@ const initialFormData = {
 export class Create721 extends React.Component<any> {
   formRef: MobxForm;
   @observable formData = initialFormData;
-  isFormSent = true;
-  txHash: String = "sss";
+  @observable isFormSent = false;
+  @observable txHash: String = "";
+  @observable isProcessing = false;
+  @observable error: any = false;
 
   submit = async () => {
     const isMetamask = this.props.user.isMetamask;
-    const deployNewToken = deployNFT.deployERC721(isMetamask);
+    const { type } = this.props
+
+    const deployNewToken = deployNFT.deployERC721(type)(isMetamask);
 
     // todo notifications
     try {
       await this.formRef.validateFields();
+      this.isProcessing = true
+
       const { name, symbol, description, logo } = this.formData;
 
-      console.log(this.formData);
+
       const image = await uploadImage(logo[0]);
       const meta = await uploadCollectionMeta({ name, image, description });
 
-      await deployNewToken(name, symbol, meta, ipfsGateway);
+      console.log({image, meta})
+
+      const cb = (txHash) => {
+        this.txHash = txHash
+      }
+
+      await deployNewToken(name, symbol, meta, ipfsGateway, cb);
+
+      console.log('token deployed')
+
       this.formData = initialFormData;
+      this.isFormSent = true
+      this.isProcessing = false
     } catch (e) {
+      this.isProcessing = false
+      this.error = e
       return;
     }
   };
 
   render() {
-    const { isFormSent, txHash } = this;
+    const { isFormSent, txHash, isProcessing, error } = this;
+
+    if (error) {
+      return (
+        <Box direction="column" justify="center" align="center">
+          <Text>
+            Something went wrong...
+          </Text>
+          <Text>
+            {error}
+          </Text>
+        </Box>
+      );
+    }
+
+    if (isProcessing) {
+      return (
+        <Box direction="column" justify="center" align="center">
+          <Text>
+            Processing...
+          </Text>
+        </Box>
+      );
+    }
 
     if (isFormSent) {
       return (
@@ -72,9 +114,9 @@ export class Create721 extends React.Component<any> {
           <Text>
             Collection has been successfully created!
           </Text>
-          <Text>
+          {txHash && <Text>
             <ExplorerTransactionLink hash={txHash} />
-          </Text>
+          </Text>}
         </Box>
       );
     }

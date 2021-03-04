@@ -26,8 +26,8 @@ export const Create = () => {
     });
   };
 
-  const openCreate721AssetModal = () => {
-    return actionModals.open(() => <Create721Asset />, {
+  const openCreate721AssetModal = (type: 'hrc721' | 'hrc1155') => {
+    return actionModals.open(() => <Create721Asset type={type} />, {
       title: "Connect Your Wallet",
       //closeText: "Close",
       noValidation: true,
@@ -73,13 +73,13 @@ export const Create = () => {
                 style={{marginTop: '20px', marginBottom: '20px'}}
                 justify="center"
                 direction="row">
-                <Box className={styles.collectionType} onClick={openCreate721AssetModal}>
+                <Box className={styles.collectionType} onClick={() => openCreate721AssetModal('hrc721')}>
 
                   <img className={styles.collectionTypeImage} src="/davinciCards_single.svg" />
 
                   Single
                 </Box>
-                <Box className={styles.collectionType} onClick={openCreate721AssetModal}>
+                <Box className={styles.collectionType} onClick={() => openCreate721AssetModal('hrc1155')}>
 
                   <img className={styles.collectionTypeImage} src="/davinciCards_multiple.svg" />
 

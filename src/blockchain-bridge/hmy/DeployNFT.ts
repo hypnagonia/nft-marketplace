@@ -4,6 +4,7 @@ import { mulDecimals } from "../../utils";
 import { web3 } from "../eth";
 import erc721json from "../../abi/DavinciToken.json";
 import hrc721Factory from "../../abi/DavinciTokenFactory.json";
+import hrc1155Factory from '../../abi/DavinciMultipleTokenFactory.json';
 
 import {ipfsGateway} from '../../services/ipfs/ipfsClient'
 
@@ -29,10 +30,11 @@ export class DeployNFT {
   }
 
   // https://github.com/harmony-one/davinci_nft_marketplace/tree/master/contracts/token
-  deployERC721 = isMetamask => isMetamask ? this.deployERC721Web3 : this.deployERC721Hmy;
+  deployERC721 = type => type === 'hrc721'
+    ? isMetamask => isMetamask ? this.deployERC721Web3 : this.deployERC721Hmy
+    : isMetamask => isMetamask ? this.deployERC1155Web3 : this.deployERC1155Hmy
 
-
-  private deployERC721Hmy = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl) => {
+  private deployERC721Hmy = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl, cb) => {
     return new Promise(async (resolve, reject) => {
 
       const hmyTokenContract = this.hmy.contracts.createContract(
@@ -47,7 +49,7 @@ export class DeployNFT {
           .methods
           .createDavinciToken(name, symbol, contractURI, tokenBaseURI)
           .send(this.options)
-          .on('transactionHash', (...a)=>console.log('sendTxCallback', a));
+          .on('transactionHash', cb);
 
         resolve(res);
       } catch (e) {
@@ -57,7 +59,7 @@ export class DeployNFT {
     });
   };
 
-  private deployERC721Web3 = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl) => {
+  private deployERC721Web3 = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl, cb) => {
     return new Promise(async (resolve, reject) => {
       try {
         // @ts-ignore
@@ -71,7 +73,61 @@ export class DeployNFT {
             from: accounts[0],
             gas: process.env.GAS_LIMIT,
             gasPrice: new BN(await web3.eth.getGasPrice()).mul(new BN(1))
-          });
+          })
+          .on('transactionHash', cb);
+
+        resolve(res);
+      } catch (e) {
+        console.log("deployERC721 something wrong", e);
+        reject(e);
+      }
+    });
+  };
+
+
+  private deployERC1155Hmy = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl, cb) => {
+    console.log('1155')
+    return new Promise(async (resolve, reject) => {
+
+      const hmyTokenContract = this.hmy.contracts.createContract(
+        hrc1155Factory.abi,
+        process.env.HRC1155_FACTORY
+      );
+
+      try {
+        // @ts-ignore
+        await connectToOneWallet(hmyTokenContract.wallet, null, reject);
+        const res = await hmyTokenContract
+          .methods
+          .createDavinciMultipleToken(name, symbol, contractURI, tokenBaseURI)
+          .send(this.options)
+          .on('transactionHash', cb);
+
+        resolve(res);
+      } catch (e) {
+        console.log("deployERC721Hmy something wrong", e);
+        reject(e);
+      }
+    });
+  };
+
+  private deployERC1155Web3 = (name, symbol, contractURI = defaultBaseUrl, tokenBaseURI = defaultBaseUrl, cb) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // @ts-ignore
+        const accounts = await ethereum.enable();
+        const erc721Contract = new web3.eth.Contract(hrc1155Factory.abi,   process.env.HRC1155_FACTORY);
+
+        const res = await erc721Contract
+          .methods
+          .createDavinciMultipleToken(name, symbol, contractURI, tokenBaseURI)
+          .send({
+            from: accounts[0],
+            gas: process.env.GAS_LIMIT,
+            gasPrice: new BN(await web3.eth.getGasPrice()).mul(new BN(1))
+          })
+          .on('transactionHash', cb);
+
         resolve(res);
       } catch (e) {
         console.log("deployERC721 something wrong", e);
