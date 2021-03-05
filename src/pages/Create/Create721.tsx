@@ -17,7 +17,7 @@ import {
 } from "components/Form";
 import { IStores } from "../../stores";
 import { imageFile, moreThanZero } from "../../utils";
-import { deployNFT } from "../../blockchain-bridge/hmy/index";
+import { NFTFactoriesManager } from "../../blockchain-bridge/hmy/index";
 import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
 import { uploadImage, uploadCollectionMeta } from "../../services/ipfs";
@@ -46,7 +46,7 @@ export class Create721 extends React.Component<any> {
     const isMetamask = this.props.user.isMetamask;
     const { type } = this.props
 
-    const deployNewToken = deployNFT.deployERC721(type)(isMetamask);
+    const deployNewToken = NFTFactoriesManager.deployCollection(type)(isMetamask);
 
     // todo notifications
     try {
