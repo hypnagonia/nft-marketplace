@@ -61,7 +61,7 @@ export const CollectionSelect = ({ collections, onChange, value, type }: ICollec
 
             <img className={styles.collectionImage} src={c.image} />
 
-            <span className={styles.name}>{c.name}</span>
+            <span className={styles.name}>{c.symbol || c.name}</span>
           </Box>
         ))}
     </Box>

@@ -23,7 +23,6 @@ import { observable } from "mobx";
 import { uploadImage, uploadCollectionMeta } from "../../services/ipfs";
 import { ipfsGateway } from "../../services/ipfs/ipfsClient";
 
-
 const initialFormData = {
   royalties: 10,
   name: "",
@@ -57,9 +56,7 @@ export class Create721 extends React.Component<any> {
 
 
       const image = await uploadImage(logo[0]);
-      const meta = await uploadCollectionMeta({ name, image, description });
-
-      console.log({image, meta})
+      const meta = await uploadCollectionMeta({ symbol, name, image, description });
 
       const cb = (txHash) => {
         this.txHash = txHash
